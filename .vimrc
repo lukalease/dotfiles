@@ -3,14 +3,14 @@ set nocompatible
 
 " Plugins
 call plug#begin('~/.vim/plugged')
-Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
-" Plug 'flazz/vim-colorschemes'
+Plug 'flazz/vim-colorschemes'
 Plug 'chriskempson/base16-vim'
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 filetype plugin indent on
@@ -131,10 +131,6 @@ set listchars=tab:→\ ,eol:$,trail:·
 " Clear the trailing whitespace in the file
 noremap <F2> :%s/\s*$//<CR>
 
-" Swap lines
-" noremap <C-j> ddjP<Esc>
-" noremap <C-k> ddkkp<Esc>
-
 " Easy editing of .vimrc
 noremap <silent> <leader>ev :e $MYVIMRC<CR>
 
@@ -143,9 +139,6 @@ augroup reload_vimrc " {
     autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
-
-" CtrlP configuration
-let g:ctrlp_working_path_mode = 0
 
 " UltiSnips configuration
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -173,4 +166,12 @@ set cinoptions+=E-s
 " clang-format integration
 map <C-K> :py3f /usr/local/share/clang/clang-format.py<cr>
 imap <C-K> <c-o>:py3f /usr/local/share/clang/clang-format.py<cr>
+
+" fzf configuration
+noremap <C-P> :Files<CR>
+noremap <Leader>b :Buffers<CR>
+noremap <Leader>t :tags<CR>
+noremap <Leader>T :Tags<CR>
+noremap <Leader>h :History<CR>
+let g:fzf_tags_command = 'ctags -R --c++-kinds=+p --fields=+iaS --extras=+q'
 
